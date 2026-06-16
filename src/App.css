@@ -1,21 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .layout {
   display: flex;
-  width: 100%;
-  height: 100vh;
 }
 
 .main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-  min-width: 0;
+  margin-left: 200px;
+  padding-top: 60px;
+  width: calc(100% - 200px);
 }
 
 .content {
-  flex: 1;
-  overflow-y: auto;
   padding: 24px;
-  background: #f5f6fa;
 }

@@ -3,47 +3,50 @@ import { Link, useLocation } from 'react-router-dom';
 import './sidebar.css';
 import logo from "../../assets/logo.png";
 import company from "../../assets/company.png";
+import close from "../../assets/close.png";
+import open from "../../assets/open.png";
 
-{/* Logo */ }
+import { MdDashboard, MdShoppingBag, MdReceipt, MdPeople, MdBarChart, MdSettings, MdHelp } from "react-icons/md";
 
-function Sidebar() {
+function Sidebar({ isOpen, setIsOpen }) {
   const location = useLocation();
   const [productOpen, setProductOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
 
-
-      {/* Logo */}
+      {/* Logo + Toggle Button */}
       <div className="logo">
-        <img src={logo} alt="company" />
+        {isOpen && <img src={logo} alt="company" />}
+        <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <img src={close} alt="open"  /> : "☰" }
+        </button>
       </div>
 
-      <div className="kany">
-        <img src={company} alt="company" />
-      </div>
-
-
+      {/* Company */}
+      {isOpen && (
+        <div className="kany">
+          <img src={company} alt="company" />
+        </div>
+      )}
 
       {/* General */}
-      <p className="menu-label">GENERAL</p>
+      {isOpen && <p className="menu-label">GENERAL</p>}
       <div className="menu">
 
-        <Link to="/" className={location.pathname === "/" ? "active" : ""}>
-          Dashboard
+        <Link to="dashboard" className={location.pathname === "/dashboard" ? "active" : ""}>
+          <MdDashboard className="menu-icon" />
+          {isOpen && <span>Dashboard</span>}
         </Link>
 
-        {/* Product Dropdown */}
-        <div
-          className="dropdown-toggle"
-          onClick={() => setProductOpen(!productOpen)}
-        >
-          <span> Product (119)</span>
-          <span>{productOpen ? "▲" : "▼"}</span>
+        <div className="dropdown-toggle" onClick={() => setProductOpen(!productOpen)}>
+          <MdShoppingBag className="menu-icon" />
+          {isOpen && <span>Product (119)</span>}
+          {isOpen && <span>{productOpen ? "▲" : "▼"}</span>}
         </div>
 
-        {productOpen && (
+        {productOpen && isOpen && (
           <div className="dropdown-items">
             <Link to="/product/sneakers">Sneakers</Link>
             <Link to="/product/jacket">Jacket</Link>
@@ -53,43 +56,55 @@ function Sidebar() {
         )}
 
         <Link to="/transaction" className={location.pathname === "/transaction" ? "active" : ""}>
-          Transaction (441)
+          <MdReceipt className="menu-icon" />
+          {isOpen && <span>Transaction (441)</span>}
         </Link>
 
         <Link to="/customers" className={location.pathname === "/customers" ? "active" : ""}>
-          Customers
+          <MdPeople className="menu-icon" />
+          {isOpen && <span>Customers</span>}
         </Link>
 
         <Link to="/sales" className={location.pathname === "/sales" ? "active" : ""}>
-          Sales Report
+          <MdBarChart className="menu-icon" />
+          {isOpen && <span>Sales Report</span>}
         </Link>
 
       </div>
 
       {/* Tools */}
-      <p className="menu-label">TOOLS</p>
+      {isOpen && <p className="menu-label">TOOLS</p>}
       <div className="tools">
-        <Link to="/settings"> Account & Settings</Link>
-        <Link to="/help"> Help</Link>
+        <Link to="/settings">
+          <MdSettings className="menu-icon" />
+          {isOpen && <span>Account & Settings</span>}
+        </Link>
+        <Link to="/help">
+          <MdHelp className="menu-icon" />
+          {isOpen && <span>Help</span>}
+        </Link>
 
-        <div className="dark-mode-toggle">
-          <span> Dark Mode</span>
-          <div
-            className={`toggle-switch ${darkMode ? "on" : ""}`}
-            onClick={() => setDarkMode(!darkMode)}
-          />
-        </div>
+        {isOpen && (
+          <div className="dark-mode-toggle">
+            <span>Dark Mode</span>
+            <div
+              className={`toggle-switch ${darkMode ? "on" : ""}`}
+              onClick={() => setDarkMode(!darkMode)}
+            />
+          </div>
+        )}
       </div>
 
-      {/* User */}
-      <div className="user">
-        <div className="user-img">👤</div>
-        <div>
-          <p>Guy Hawkins</p>
-          <small>Admin</small>
-        </div>
-        <span style={{ marginLeft: "auto" }}>▼</span>
-      </div>
+{/* User */}
+{isOpen && (
+  <div className="user">
+    <div className="user-img">👤</div>
+ 
+    <Link to="/" >
+      Logout
+    </Link>
+  </div>
+)}
 
     </div>
   );

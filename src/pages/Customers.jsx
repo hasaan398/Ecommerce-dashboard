@@ -1,3 +1,5 @@
 export default function Customers() {
-  return <div>Customers</div>;
+  return (  
+  <h1>Customers</h1>
+);
 }

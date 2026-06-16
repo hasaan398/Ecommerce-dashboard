@@ -6,17 +6,63 @@
   display: flex;
   flex-direction: column;
   padding: 20px 0;
-  flex-shrink: 0;
-  margin-top: 0;
-    position: sticky;  /* ← yeh add karo */
-  top: 0;  
+  flex: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  
+}
+.sidebar.closed {
+  width: 60px;
+  .gg{
+    display: none;
+  }
+  .cl img{
+  display: block;
+  margin-left: 10px;
+}
+}
+.menu-icon  {
+  margin-top: 15px;
+  color: #2563EB;
+
+}
+.sidebar.closed .menu-icon {
+  margin-top: 15px;
 }
 
+.sidebar.open .menu-icon {
+  margin-top: 0;
+}
+.toggle-btn{
+  font-size: 20px;
+  color: #333;
+}
+.sidebar.open {
+  width: 200px;
+  .cl img{
+  width: 200px;
+}
+}
+
+.sidebar {
+  transition: width 0.3s ease;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  color: #555;
+  margin-left: 5px;
+}
 /* Logo */
 .logo {
 
   align-items: center;
   margin-bottom: 30px;
+  margin-left: 10px;
 }
 .logo img {
   width: 50%;
@@ -24,9 +70,16 @@
 }
 .kany img {
   width: 80%;
-  margin-bottom: 10px;
+
+}
+.sidebar {
+  width: 200px;
+  transition: width 0.3s ease;
 }
 
+.sidebar.closed {
+  width: 60px;
+}
 
 
 
@@ -45,7 +98,23 @@
   display: flex;
   flex-direction: column;
 }
+.menu-icon {
+  font-size: 20px;
+  min-width: 20px;
+  color: #555;
+}
 
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar.closed .menu a,
+.sidebar.closed .tools a {
+  justify-content: center;
+  padding: 12px;
+}
 .menu a,
 .tools a {
   display: flex;
@@ -83,7 +152,16 @@
   border-radius: 8px;
   justify-content: space-between;
 }
+.dropdown-toggle::after {
+    display: none;
+    margin-left: .255em;
+    vertical-align: .255em;
 
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
 
 
 .dropdown-items {
@@ -163,3 +241,14 @@
   font-size: 11px;
   color: #aaa;
 }
+.user a{
+  background-color: #2563EB;
+  margin-left: auto;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 5px;
+
+}
+

@@ -1,3 +1,3 @@
 export default function SalesReport() {
-  return <div>Sales Report</div>;
+  return <h1>Sales Report</h1>;
 }

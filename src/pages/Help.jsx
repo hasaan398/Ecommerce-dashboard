@@ -1,3 +1,4 @@
 export default function Help() {
-  return <div>Help</div>;
+  return 
+  <h1>Help</h1>;
 }

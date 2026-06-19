@@ -75,7 +75,7 @@ function Sidebar({ isOpen, setIsOpen }) {
       {/* Tools */}
       {isOpen && <p className="menu-label">TOOLS</p>}
       <div className="tools">
-        <Link to="/settings">
+        <Link to="/setting">
           <MdSettings className="menu-icon" />
           {isOpen && <span>Account & Settings</span>}
         </Link>

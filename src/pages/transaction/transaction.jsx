@@ -1,43 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import "./product.css";
-import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import "./transaction.css";
 import searchIcon from "../../assets/search.png";
-import { allRows, tabs } from "../../data";
+import { orders, orderTabs } from "../../data";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
-export default function Product({ category }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState(category || "Sneakers");
+export default function Transaction() {
+  const [activeTab, setActiveTab] = useState("All Orders");
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    if (location.state?.success) {
-      toast.success(location.state.success);
-      window.history.replaceState({}, document.title);
-    }
-  }, [location.state]);
-
-  // ✅ Sidebar se category change hone par tab update karo
-  useEffect(() => {
-    if (category) {
-      setActiveTab(category);
-    }
-  }, [category]);
-
-  const filteredRows = allRows.filter(
-    (r) =>
-      r.category?.toLowerCase().trim() === activeTab.toLowerCase() &&
-      r.name?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredRows = orders.filter((r) => {
+    const matchTab = activeTab === "All Orders" ? true : r.status === activeTab;
+    const matchSearch = r.name?.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchTab && matchSearch;
+  });
 
   const columns = [
     {
       field: "name",
-      headerName: "Product",
-      width: 260,
+      headerName: "Orders",
+      width: 240,
       renderCell: (params) => (
         <div className="product-cell">
           <div className="product-thumb">
@@ -50,16 +32,25 @@ export default function Product({ category }) {
         </div>
       ),
     },
+    { field: "customer", headerName: "Customer", width: 160 },
     { field: "price", headerName: "Price", width: 100 },
-    { field: "size", headerName: "Size", width: 80 },
-    { field: "qty", headerName: "QTY", width: 80 },
-    { field: "date", headerName: "Date", width: 180 },
+    { field: "date", headerName: "Date", width: 110 },
+    {
+      field: "payment",
+      headerName: "Payment",
+      width: 110,
+      renderCell: (params) => (
+        <span className={`payment-badge ${params.value === "Paid" ? "paid" : "unpaid"}`}>
+          {params.value}
+        </span>
+      ),
+    },
     {
       field: "status",
       headerName: "Status",
-      width: 130,
+      width: 110,
       renderCell: (params) => (
-        <span className={`status-badge ${params.value === "Out of Stock" ? "outofstock" : "available"}`}>
+        <span className={`order-status ${params.value === "Shipping" ? "shipping" : "cancelled"}`}>
           {params.value}
         </span>
       ),
@@ -69,37 +60,27 @@ export default function Product({ category }) {
       headerName: "Action",
       width: 120,
       sortable: false,
-      renderCell: (params) => (
+      renderCell: () => (
         <div className="action-btns">
-          <span title="View">
-            <FaEye />
-          </span>
-          <span
-            title="Edit"
-            onClick={() => navigate(`/product/add/${params.row.id}`)}
-            style={{ cursor: "pointer" }}
-          >
-            <FaEdit />
-          </span>
-          <span title="Delete">
-            <FaTrash />
-          </span>
+          <span title="View"><FaEye /></span>
+          <span title="Edit"><FaEdit /></span>
+          <span title="Delete"><FaTrash /></span>
         </div>
       ),
     },
   ];
 
   return (
-    <div className="product-page">
+    <div className="transaction-page">
 
       {/* Title */}
       <div className="page-title">
-        <h1>Product</h1>
-        <p>Dashboard ▼ Product ▼ {activeTab}</p>
+        <h1>Orders</h1>
+        <p>Dashboard ▼ Orders ▼ {activeTab}</p>
       </div>
 
       {/* Toolbar */}
-      <div className="product-toolbar">
+      <div className="transaction-toolbar">
         <div className="search-box">
           <input
             type="text"
@@ -112,26 +93,21 @@ export default function Product({ category }) {
         <div className="toolbar-right">
           <button className="filter-btn">Filter ▼</button>
           <button className="export-btn">Export ↓</button>
-          <button className="new-btn" onClick={() => navigate("/product/add")}>
-            New Product +
-          </button>
+          <button className="new-btn">+ New Order</button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="product-tabs">
-        {tabs.map((tab) => {
-          const count = allRows.filter((r) => r.category === tab.name).length;
-          return (
-            <button
-              key={tab.name}
-              className={`tab-btn ${activeTab === tab.name ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.name)}
-            >
-              {tab.name} ({count})
-            </button>
-          );
-        })}
+      <div className="transaction-tabs">
+   {orderTabs.map((tab) => (
+  <button
+    key={tab.name}
+    className={`tab-btn ${activeTab === tab.name ? "active" : ""}`}
+    onClick={() => setActiveTab(tab.name)}
+  >
+    {tab.name} ({tab.count})
+  </button>
+))}
       </div>
 
       {/* DataGrid */}
@@ -141,15 +117,13 @@ export default function Product({ category }) {
           columns={columns}
           getRowId={(row) => row.id}
           getRowClassName={(params) =>
-            params.row.status === "Out of Stock" ? "row-outofstock" : ""
+            params.row.status === "Cancelled" ? "row-cancelled" : ""
           }
           rowHeight={70}
           disableRowSelectionOnClick
           autoHeight
           initialState={{
-            pagination: {
-              paginationModel: { pageSize: 10 },
-            },
+            pagination: { paginationModel: { pageSize: 10 } },
           }}
           pageSizeOptions={[5, 10, 20]}
           sx={{
@@ -175,9 +149,7 @@ export default function Product({ category }) {
               justifyContent: "space-between",
               padding: "0 16px",
             },
-            "& .MuiTablePagination-root": {
-              width: "auto",
-            },
+            "& .MuiTablePagination-root": { width: "auto" },
             "& .MuiTablePagination-toolbar": {
               minHeight: "40px",
               paddingLeft: 0,
@@ -186,9 +158,7 @@ export default function Product({ category }) {
               fontSize: "12px",
               color: "#777",
             },
-            "& .MuiTablePagination-spacer": {
-              display: "none",
-            },
+            "& .MuiTablePagination-spacer": { display: "none" },
           }}
         />
       </div>

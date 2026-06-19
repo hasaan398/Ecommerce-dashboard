@@ -319,3 +319,40 @@ export const tabs = [
   { name: "T-Shirt" },
   { name: "Bag" },
 ];
+
+
+export const orders = [
+  { id: 1, productId: "021231", image: shoesImg, name: "Kanky Kitadakate (Green)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Paid", status: "Shipping" },
+  { id: 2, productId: "021231", image: shoesImg, name: "Kanky Kitadakate (Green)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Unpaid", status: "Cancelled" },
+  { id: 3, productId: "021231", image: shoesImg, name: "Kanky Kitadakate (Green)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Paid", status: "Shipping" },
+  { id: 4, productId: "021231", image: shoesImg, name: "Story Honzo (Cream)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Paid", status: "Shipping" },
+  { id: 5, productId: "021231", image: shoesImg, name: "Kanky Kitadakate (Green)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Unpaid", status: "Cancelled" },
+  { id: 6, productId: "021231", image: shoesImg, name: "Kanky Kitadakate (Green)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Paid", status: "Shipping" },
+  { id: 7, productId: "021231", image: shoesImg, name: "Beigl Coffe (Navy)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Unpaid", status: "Cancelled" },
+  { id: 8, productId: "021231", image: shoesImg, name: "Story Honzo (Cream)", customer: "Leslie Alexander", price: "$21.78", date: "04/17/23", payment: "Unpaid", status: "Cancelled" },
+];
+
+export  const orderTabs = [
+  { name: "All Orders", count: orders.length },
+  { name: "Shipping", count: orders.filter(o => o.status === "Shipping").length },
+  { name: "Completed", count: orders.filter(o => o.status === "Completed").length },
+  { name: "Cancel", count: orders.filter(o => o.status === "Cancelled").length },
+];
+
+
+export const customers = [
+  { id: 1, customerId: "ID 12451", name: "Leslie Alexander", email: "georgia@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2972 Westheimer Rd. Santa Ana, Illinois 85486" },
+  { id: 2, customerId: "ID 12452", name: "Guy Hawkins", email: "guys@examp.com", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "4517 Washington Ave. Manchester, Kentucky 39495" },
+  { id: 3, customerId: "ID 12453", name: "Kristin Watson", email: "kristin@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2118 Thornridge Cir. Syracuse, Connecticut 35624" },
+  { id: 4, customerId: "ID 12453", name: "Kristin Watson", email: "kristin@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2118 Thornridge Cir. Syracuse, Connecticut 35624" },
+  { id: 5, customerId: "ID 12452", name: "Guy Hawkins", email: "guys@examp.com", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "4517 Washington Ave. Manchester, Kentucky 39495" },
+  { id: 6, customerId: "ID 12451", name: "Leslie Alexander", email: "georgia@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2972 Westheimer Rd. Santa Ana, Illinois 85486" },
+  { id: 7, customerId: "ID 12453", name: "Kristin Watson", email: "kristin@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2118 Thornridge Cir. Syracuse, Connecticut 35624" },
+  { id: 8, customerId: "ID 12451", name: "Leslie Alexander", email: "georgia@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2972 Westheimer Rd. Santa Ana, Illinois 85486" },
+  { id: 9, customerId: "ID 12453", name: "Kristin Watson", email: "kristin@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2118 Thornridge Cir. Syracuse, Connecticut 35624" },
+  { id: 10, customerId: "ID 12451", name: "Leslie Alexander", email: "georgia@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2972 Westheimer Rd. Santa Ana, Illinois 85486" },
+  { id: 11, customerId: "ID 12453", name: "Kristin Watson", email: "kristin@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2118 Thornridge Cir. Syracuse, Connecticut 35624" },
+  { id: 12, customerId: "ID 12451", name: "Leslie Alexander", email: "georgia@examp...", phone: "+62 819 1314 1435", purchases: "$21.78", qty: "30 Order", address: "2972 Westheimer Rd. Santa Ana, Illinois 85486" },
+  
+  
+];

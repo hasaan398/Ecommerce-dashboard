@@ -1,4 +1,4 @@
-.product-page {
+.transaction-page {
   padding: 24px;
 }
 
@@ -14,7 +14,7 @@
 }
 
 /* Toolbar */
-.product-toolbar {
+.transaction-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +72,7 @@
 }
 
 /* Tabs */
-.product-tabs {
+.transaction-tabs {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
@@ -139,41 +139,49 @@
   line-height: 1.3;
 }
 
-/* Status */
-.status-badge {
+/* Payment Badge */
+.payment-badge {
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
 }
 
-.status-badge.available {
+.payment-badge.paid {
   background: #e8f5e9;
   color: #4CAF50;
 }
-.row-outofstock {
-  opacity: 0.6;
-  background-color: #f8f8f8 !important;
+
+.payment-badge.unpaid {
+  background: #fff8e1;
+  color: #F8C140;
 }
 
-.row-outofstock:hover {
-  background-color: #f2f2f2 !important;
+/* Status Badge */
+.order-status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
-/* Image bhi thori fade ho jaye */
-.row-outofstock .product-thumb img {
-  filter: grayscale(100%);
+.order-status.shipping {
+  background: #fff3e0;
+  color: #FF9800;
 }
 
-/* Text dull */
-.row-outofstock .product-name-text,
-.row-outofstock .product-id {
-  color: #999;
-}
-.status-badge.outofstock {
+.order-status.cancelled {
   background: #fdecea;
   color: #e53935;
-  padding: 4px 10px;
+}
+
+/* Row highlight */
+.row-cancelled {
+  background-color: #fdecea !important;
+}
+
+.row-cancelled:hover {
+  background-color: #fbe0dd !important;
 }
 
 /* Actions */
@@ -191,7 +199,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .product-toolbar {
+  .transaction-toolbar {
     flex-direction: column;
   }
   .search-box {

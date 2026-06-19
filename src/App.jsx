@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import "./app.css";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "./components/sidebar/sidebar";
 import Header from "./components/navbar/navbar";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Product from "./pages/products/Product";
-
-import Transaction from "./pages/Transaction";
-import Customers from "./pages/Customers";
-import SalesReport from "./pages/SalesReport";
-import Settings from "./pages/Settings";
-import Help from "./pages/Help";
+import AddProduct from "./pages/products/AddProduct";
+import Transaction from "./pages/transaction/transaction";
+import Customers from "./pages/Customers/customers";
 import Login from "./pages/login/login";
+import AddCustomer from "./pages/Customers/addcustomer";
+import Setting from "./pages/setting/setting";
 
-// Layout component
+
+
 function DashboardLayout({ sidebarOpen, setSidebarOpen }) {
   return (
     <div className="layout">
@@ -22,7 +23,7 @@ function DashboardLayout({ sidebarOpen, setSidebarOpen }) {
       <div className="main" style={{ marginLeft: sidebarOpen ? "200px" : "60px" }}>
         <Header isOpen={sidebarOpen} />
         <div className="content">
-          <Outlet />  {/* ← pages yahan render honge */}
+          <Outlet />
         </div>
       </div>
     </div>
@@ -35,26 +36,32 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        {/* Login - no sidebar, no header */}
         <Route path="/" element={<Login />} />
 
-        {/* Dashboard pages - sidebar + header ke saath */}
-        <Route element={<DashboardLayout sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}>
-          <Route path="/dashboard" element={<Dashboard />} />        
+        <Route
+          element={
+            <DashboardLayout
+              sidebarOpen={sidebarOpen}
+              setSidebarOpen={setSidebarOpen}
+            />
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/product" element={<Product />} />
           <Route path="/product/sneakers" element={<Product category="Sneakers" />} />
           <Route path="/product/jacket" element={<Product category="Jacket" />} />
           <Route path="/product/tshirt" element={<Product category="T-Shirt" />} />
           <Route path="/product/bag" element={<Product category="Bag" />} />
+          
+         <Route path="/setting" element={<Setting />} />
+<Route path="/product/add" element={<AddProduct />} />
+<Route path="/product/add/:id" element={<AddProduct />} />
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/customers" element={<Customers />} />
-          <Route path="/sales" element={<SalesReport />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/help" element={<Help />} />
+          <Route path="/customers/add" element={<AddCustomer />} />
         </Route>
-
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

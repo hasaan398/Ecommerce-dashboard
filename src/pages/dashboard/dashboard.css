@@ -1,7 +1,9 @@
 .dashboard {
   padding: 24px;
 }
-
+.content{
+  background-color: #F7F7F7;
+}
 .page-title h1 {
   font-size: 24px;
   font-weight: 700;

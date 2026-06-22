@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import "./transaction.css";
 import searchIcon from "../../assets/search.png";
-import { orders, orderTabs } from "../../data";
+import { orders } from "../../data";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Transaction() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("All Orders");
   const [searchTerm, setSearchTerm] = useState("");
+
+
+  useEffect(() => {
+    if (location.state?.success) {
+      toast.success(location.state.success);
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
+  // ✅ Dynamic tab counts
+  const orderTabs = [
+    { name: "All Orders", count: orders.length },
+    { name: "Shipping", count: orders.filter((o) => o.status === "Shipping").length },
+    { name: "Completed", count: orders.filter((o) => o.status === "Completed").length },
+    { name: "Cancel", count: orders.filter((o) => o.status === "Cancelled").length },
+  ];
 
   const filteredRows = orders.filter((r) => {
     const matchTab = activeTab === "All Orders" ? true : r.status === activeTab;
@@ -93,21 +113,23 @@ export default function Transaction() {
         <div className="toolbar-right">
           <button className="filter-btn">Filter ▼</button>
           <button className="export-btn">Export ↓</button>
-          <button className="new-btn">+ New Order</button>
+          <button className="new-btn" onClick={() => navigate("/transaction/add")}>
+            + New Order
+          </button>
         </div>
       </div>
 
       {/* Tabs */}
       <div className="transaction-tabs">
-   {orderTabs.map((tab) => (
-  <button
-    key={tab.name}
-    className={`tab-btn ${activeTab === tab.name ? "active" : ""}`}
-    onClick={() => setActiveTab(tab.name)}
-  >
-    {tab.name} ({tab.count})
-  </button>
-))}
+        {orderTabs.map((tab) => (
+          <button
+            key={tab.name}
+            className={`tab-btn ${activeTab === tab.name ? "active" : ""}`}
+            onClick={() => setActiveTab(tab.name)}
+          >
+            {tab.name} ({tab.count})
+          </button>
+        ))}
       </div>
 
       {/* DataGrid */}

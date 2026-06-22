@@ -1,9 +1,6 @@
 .header {
-
   position: fixed;
   top: 0;
-  left: 200px;
-  width: calc(100% - 200px);
   height: 70px;
   display: flex;
   justify-content: space-between;
@@ -11,8 +8,19 @@
   padding: 0 24px;
   background: white;
   border-bottom: 1px solid #f0f0f0;
-  z-index: 998; 
+  z-index: 998;
+  transition: all 0.3s ease;
 }
+
+.header-open {
+  left: 200px;
+  width: calc(100% - 200px);
+}
+.header-closed {
+  left: 60px;
+  width: calc(100% - 60px);
+}
+
 .search-box {
   display: flex;
   align-items: center;
@@ -22,7 +30,7 @@
   padding: 8px 16px;
   width: 200px;
 }
-.search-box i{
+.search-box i {
   font-size: 200px;
   color: black;
 }
@@ -40,24 +48,70 @@
   gap: 20px;
 }
 
-
-
 .profile img {
   width: 25px;
   height: auto;
   border-radius: 10%;
   object-fit: cover;
 }
-.profile{
+.profile {
   margin-right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .profile p {
   margin: 0;
   font-size: 11px;
   font-weight: 600;
 }
-
 .profile small {
   font-size: 11px;
   color: #aaa;
+}
+
+
+@media (max-width: 1024px) {
+  .header-open,
+  .header-closed {
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+  .search-box {
+    width: 160px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-open,
+  .header-closed {
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+
+  .header {
+    padding: 0 12px;
+  }
+
+  .search-box {
+    width: 110px;
+    padding: 6px 10px;
+  }
+
+  .profile div {
+    display: none;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-box {
+    width: 80px;
+  }
+  .search-box input::placeholder {
+    font-size: 12px;
+  }
 }

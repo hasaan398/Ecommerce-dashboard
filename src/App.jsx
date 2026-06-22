@@ -13,6 +13,8 @@ import Customers from "./pages/Customers/customers";
 import Login from "./pages/login/login";
 import AddCustomer from "./pages/Customers/addcustomer";
 import Setting from "./pages/setting/setting";
+import AddOrder from "./pages/transaction/AddOrder";
+
 
 
 
@@ -59,6 +61,7 @@ function App() {
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/add" element={<AddCustomer />} />
+          <Route path="/transaction/add" element={<AddOrder />} />
         </Route>
       </Routes>
       <ToastContainer />

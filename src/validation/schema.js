@@ -63,5 +63,20 @@ export const addCustomerSchema = Yup.object({
     .required("Address is required"),
 });
 
-
+export const addOrderSchema = Yup.object({
+  name: Yup.string()
+    .min(3, "Product name must be at least 3 characters")
+    .required("Product name is required"),
+  customer: Yup.string()
+    .min(3, "Customer name must be at least 3 characters")
+    .required("Customer name is required"),
+  price: Yup.number()
+    .typeError("Price must be a number")
+    .positive("Price must be greater than 0")
+    .required("Price is required"),
+  payment: Yup.string()
+    .required("Please select payment status"),
+  status: Yup.string()
+    .required("Please select order status"),
+});
 export default schema;

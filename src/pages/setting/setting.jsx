@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { MdVisibility, MdVisibilityOff ,MdEdit} from "react-icons/md";
 import "./setting.css";
 
 const settingsSchema = Yup.object({
@@ -170,7 +171,7 @@ export default function Settings() {
           <div className="settings-card">
             <div className="card-header-row">
               <h6>Contact Detail</h6>
-              <span className="edit-link">Edit ✎</span>
+              <span className="edit-link"><MdEdit/></span>
             </div>
 
             <div className="form-row">
@@ -210,9 +211,9 @@ export default function Settings() {
         </form>
       )}
 
-  {activeTab === "Security" && (
-  <SecurityTab />
-)}
+      {activeTab === "Security" && (
+        <SecurityTab />
+      )}
 
       {activeTab === "Notification" && (
         <div className="settings-card">
@@ -258,7 +259,7 @@ function SecurityTab() {
         <h6>Change Password</h6>
         <p className="card-subtitle">Update your password to keep your account secure.</p>
 
-        <div className="form-group" style={{maxWidth: "400px"}}>
+        <div className="form-group" style={{ maxWidth: "400px" }}>
           <label>Old Password</label>
           <div className="password-input">
             <input
@@ -270,14 +271,16 @@ function SecurityTab() {
               onBlur={formik.handleBlur}
               className={formik.touched.oldPassword && formik.errors.oldPassword ? "input-error" : ""}
             />
-            <span onClick={() => setShowOld(!showOld)}>{showOld ? "🙈" : "👁"}</span>
+            <span onClick={() => setShowOld(!showOld)}>
+              {showOld ? <MdVisibilityOff /> : <MdVisibility />}
+            </span>
           </div>
           {formik.touched.oldPassword && formik.errors.oldPassword && (
             <small className="error-msg">{formik.errors.oldPassword}</small>
           )}
         </div>
 
-        <div className="form-group" style={{maxWidth: "400px"}}>
+        <div className="form-group" style={{ maxWidth: "400px" }}>
           <label>New Password</label>
           <div className="password-input">
             <input
@@ -289,14 +292,16 @@ function SecurityTab() {
               onBlur={formik.handleBlur}
               className={formik.touched.newPassword && formik.errors.newPassword ? "input-error" : ""}
             />
-            <span onClick={() => setShowNew(!showNew)}>{showNew ? "🙈" : "👁"}</span>
+            <span onClick={() => setShowNew(!showNew)}>
+              {showNew ? <MdVisibilityOff /> : <MdVisibility />}
+            </span>
           </div>
           {formik.touched.newPassword && formik.errors.newPassword && (
             <small className="error-msg">{formik.errors.newPassword}</small>
           )}
         </div>
 
-        <div className="form-group" style={{maxWidth: "400px"}}>
+        <div className="form-group" style={{ maxWidth: "400px" }}>
           <label>Confirm Password</label>
           <div className="password-input">
             <input
@@ -308,7 +313,9 @@ function SecurityTab() {
               onBlur={formik.handleBlur}
               className={formik.touched.confirmPassword && formik.errors.confirmPassword ? "input-error" : ""}
             />
-            <span onClick={() => setShowConfirm(!showConfirm)}>{showConfirm ? "🙈" : "👁"}</span>
+            <span onClick={() => setShowConfirm(!showConfirm)}>
+              {showConfirm ? <MdVisibilityOff /> : <MdVisibility />}
+            </span>
           </div>
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
             <small className="error-msg">{formik.errors.confirmPassword}</small>
@@ -320,4 +327,3 @@ function SecurityTab() {
     </form>
   );
 }
-

@@ -4,6 +4,7 @@ import "./login.css";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import schema from "../../validation/schema";
+import { MdVisibility, MdVisibilityOff ,MdEdit} from "react-icons/md";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 const navigate = useNavigate();
@@ -103,8 +104,7 @@ const formik = useFormik({
                 onClick={() => setShowPassword(!showPassword)}
                 style={{ cursor: "pointer" }}
               >
-                {showPassword ? "🙈" : "👁️"}
-              </span>
+{showPassword ? <MdVisibility /> :<MdVisibilityOff /> }              </span>
             </div>
 
             {formik.touched.password && formik.errors.password && (

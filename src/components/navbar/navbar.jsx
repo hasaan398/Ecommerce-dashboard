@@ -13,7 +13,6 @@ export default function Header({ isOpen, setIsOpen }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // ===== MOBILE HEADER (Figma design) =====
   if (isMobile) {
     return (
       <div className="header header-mobile">
@@ -37,7 +36,6 @@ export default function Header({ isOpen, setIsOpen }) {
     );
   }
 
-  // ===== DESKTOP HEADER =====
   return (
     <div className="header" style={{
       left: isOpen ? "200px" : "60px",

@@ -53,7 +53,6 @@ function Sidebar({ isOpen, setIsOpen }) {
 
       <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
 
-        {/* Logo + Toggle Button */}
         <div className="logo">
           {isOpen && <img src={logo} alt="company" />}
           <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
@@ -61,7 +60,6 @@ function Sidebar({ isOpen, setIsOpen }) {
           </button>
         </div>
 
-        {/* Company */}
         {isOpen && (
           <div className="kany">
             <img src={company} alt="company" />
@@ -77,7 +75,6 @@ function Sidebar({ isOpen, setIsOpen }) {
             {isOpen && <span>Dashboard</span>}
           </Link>
 
-          {/* Product item */}
           <div className="product-item" ref={productRef}>
             <div
               className="dropdown-toggle"
@@ -88,7 +85,6 @@ function Sidebar({ isOpen, setIsOpen }) {
               {isOpen && <span>{productOpen ? "▲" : "▼"}</span>}
             </div>
 
-            {/* Sidebar OPEN: normal inline dropdown */}
             {productOpen && isOpen && (
               <div className="dropdown-items">
                 <Link to="/product/sneakers" onClick={handleLinkClick}>Sneakers</Link>
@@ -98,7 +94,6 @@ function Sidebar({ isOpen, setIsOpen }) {
               </div>
             )}
 
-            {/* Sidebar CLOSED (desktop icon-mode): flyout dropdown */}
             {productOpen && !isOpen && !isMobile && (
               <div className="dropdown-flyout">
                 <span className="flyout-title">Product (119)</span>
@@ -127,7 +122,6 @@ function Sidebar({ isOpen, setIsOpen }) {
 
         </div>
 
-        {/* Tools */}
         {isOpen && <p className="menu-label">TOOLS</p>}
         <div className="tools">
           <Link to="/setting" onClick={handleLinkClick}>
@@ -150,7 +144,6 @@ function Sidebar({ isOpen, setIsOpen }) {
           )}
         </div>
 
-        {/* User */}
         {isOpen && (
           <div className="user">
             <div className="user-img">👤</div>

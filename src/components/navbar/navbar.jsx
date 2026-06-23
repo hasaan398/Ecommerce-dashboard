@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./navbar.css";
-import bellIcon from "../../assets/bell.png";
 import search from "../../assets/search.png";
-import mailIcon from "../../assets/mail.png";
 
+export default function Header({ isOpen, setIsOpen }) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
 
-export default function Header({ isOpen }) {
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 700);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // ===== MOBILE HEADER (Figma design) =====
+  if (isMobile) {
+    return (
+      <div className="header header-mobile">
+        <div className="profile">
+          <img src="https://i.pravatar.cc/32" alt="user" />
+          <div>
+            <p>Guy Hawkins</p>
+            <small>Admin</small>
+          </div>
+        </div>
+
+        <div className="header-right">
+          <button className="icon-btn">
+            <img src={search} alt="search" style={{ width: "20px" }} />
+          </button>
+          <button className="mobile-hamburger" onClick={() => setIsOpen(!isOpen)}>
+            ☰
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ===== DESKTOP HEADER =====
   return (
     <div className="header" style={{
       left: isOpen ? "200px" : "60px",
@@ -21,11 +53,11 @@ export default function Header({ isOpen }) {
 
       {/* Right */}
       <div className="header-right">
-        <div className="icon">
-          <img src={mailIcon} alt="mail" style={{width:"32px"}} />
+        <div className="icon mail-icon">
+          <img src="/src/assets/mail.png" alt="mail" style={{ width: "32px" }} />
         </div>
-        <div className="icon">
-          <img src={bellIcon} alt="bell" style={{width:"32px"}} />
+        <div className="icon bell-icon">
+          <img src="/src/assets/bell.png" alt="bell" style={{ width: "32px" }} />
         </div>
         <div className="profile">
           <img src="https://i.pravatar.cc/32" alt="user" />

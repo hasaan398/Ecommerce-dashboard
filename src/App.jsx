@@ -19,11 +19,12 @@ import AddOrder from "./pages/transaction/AddOrder";
 
 
 function DashboardLayout({ sidebarOpen, setSidebarOpen }) {
+  const isMobile = window.innerWidth <= 700;
   return (
     <div className="layout">
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-      <div className="main" style={{ marginLeft: sidebarOpen ? "200px" : "60px" }}>
-        <Header isOpen={sidebarOpen} />
+      <div className="main" style={{ marginLeft: isMobile ? "0" : (sidebarOpen ? "200px" : "60px") }}>
+        <Header isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
         <div className="content">
           <Outlet />
         </div>

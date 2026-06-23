@@ -76,7 +76,7 @@ export default function Dashboard() {
             <div className="stat-card">
               <div className="stat-top">
                 <span>Total Product</span>
-                <span>↘</span>
+                <span>↙</span>
               </div>
               <h2>5.000</h2>
               <small className="red">-7.15% From last week</small>

@@ -14,8 +14,8 @@ import Login from "./pages/login/login";
 import AddCustomer from "./pages/Customers/addcustomer";
 import Setting from "./pages/setting/setting";
 import AddOrder from "./pages/transaction/AddOrder";
-
-
+import SalesReport from "./pages/salesreport/SalesReport";
+import Help from "./pages/help/Help";
 
 
 function DashboardLayout({ sidebarOpen, setSidebarOpen }) {
@@ -55,7 +55,6 @@ function App() {
           <Route path="/product/jacket" element={<Product category="Jacket" />} />
           <Route path="/product/t-shirt" element={<Product category="T-Shirt" />} />
           <Route path="/product/bag" element={<Product category="Bag" />} />
-          
          <Route path="/setting" element={<Setting />} />
 <Route path="/product/add" element={<AddProduct />} />
 <Route path="/product/add/:id" element={<AddProduct />} />
@@ -63,6 +62,8 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/add" element={<AddCustomer />} />
           <Route path="/transaction/add" element={<AddOrder />} />
+          <Route path="/sales" element={<SalesReport />} />
+          <Route path="/help" element={<Help />} />
         </Route>
       </Routes>
       <ToastContainer />

@@ -15,6 +15,15 @@ function Sidebar({ isOpen, setIsOpen }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
   const productRef = useRef(null);
 
+  // Dark mode body class control
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   useEffect(() => {
     function handleResize() {
       const mobile = window.innerWidth <= 700;
@@ -28,7 +37,6 @@ function Sidebar({ isOpen, setIsOpen }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close flyout dropdown if user clicks outside it
   useEffect(() => {
     function handleClickOutside(e) {
       if (productRef.current && !productRef.current.contains(e.target)) {
@@ -39,14 +47,12 @@ function Sidebar({ isOpen, setIsOpen }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Mobile par link click hote hi off-canvas sidebar band ho jaye
   const handleLinkClick = () => {
     if (isMobile) setIsOpen(false);
   };
 
   return (
     <>
-      {/* Overlay backdrop - mobile only, jab sidebar open ho */}
       {isMobile && isOpen && (
         <div className="sidebar-overlay" onClick={() => setIsOpen(false)}></div>
       )}
@@ -66,7 +72,6 @@ function Sidebar({ isOpen, setIsOpen }) {
           </div>
         )}
 
-        {/* General */}
         {isOpen && <p className="menu-label">GENERAL</p>}
         <div className="menu">
 
@@ -89,7 +94,7 @@ function Sidebar({ isOpen, setIsOpen }) {
               <div className="dropdown-items">
                 <Link to="/product/sneakers" onClick={handleLinkClick}>Sneakers</Link>
                 <Link to="/product/jacket" onClick={handleLinkClick}>Jacket</Link>
-                <Link to="/product/tshirt" onClick={handleLinkClick}>T-Shirt</Link>
+                <Link to="/product/t-shirt" onClick={handleLinkClick}>T-Shirt</Link>
                 <Link to="/product/bag" onClick={handleLinkClick}>Bag</Link>
               </div>
             )}
@@ -99,7 +104,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                 <span className="flyout-title">Product (119)</span>
                 <Link to="/product/sneakers" onClick={() => setProductOpen(false)}>Sneakers</Link>
                 <Link to="/product/jacket" onClick={() => setProductOpen(false)}>Jacket</Link>
-                <Link to="/product/tshirt" onClick={() => setProductOpen(false)}>T-Shirt</Link>
+                <Link to="/product/t-shirt" onClick={() => setProductOpen(false)}>T-Shirt</Link>
                 <Link to="/product/bag" onClick={() => setProductOpen(false)}>Bag</Link>
               </div>
             )}

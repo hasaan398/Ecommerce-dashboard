@@ -1,6 +1,9 @@
 .dashboard {
   padding: 24px;
   max-width: 100%;
+  width: 100%;
+  flex: 1;
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 
@@ -8,11 +11,12 @@
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 4px;
+  color: var(--text-primary);
 }
 
 .page-title p {
   font-size: 12px;
-  color: #aaa;
+  color: var(--text-secondary);
   margin-bottom: 24px;
 }
 
@@ -43,15 +47,15 @@
 
 /* Sales Target */
 .sales-target {
-  background: white;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--border-color);
 }
 
 .sales-target h6 {
   font-size: 13px;
-  color: #aaa;
+  color: var(--text-secondary);
   margin-bottom: 12px;
 }
 
@@ -63,38 +67,40 @@
 
 .target-row small {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-secondary);
   display: block;
 }
 
 .target-row h4 {
   font-size: 12px;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 .progress-bar {
   height: 8px;
-  background: #f0f0f0;
+  background: var(--hover-bg);
   border-radius: 10px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: #2563EB;
+  background: var(--accent);
   border-radius: 10px;
 }
 
 /* Stat Cards */
 .stat-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .stat-card.blue {
-  background: #2563EB;
+  background: var(--accent);
   color: white;
 }
 
@@ -103,11 +109,11 @@
   justify-content: space-between;
   font-size: 12px;
   margin-bottom: 12px;
-  color: #aaa;
+  color: var(--text-secondary);
 }
 
 .stat-card:hover {
-  background-color: #2563EB;
+  background-color:#2563EB;
   color: white;
 }
 
@@ -126,8 +132,6 @@
 .stat-card.blue small { color: rgba(255, 255, 255, 0.8); }
 
 /* Sales Chart */
-
-
 .sales-chart img {
   width: 100%;
   height: auto;
@@ -182,11 +186,12 @@
   font-weight: 700;
   font-size: 14px;
   margin: 0;
+  color: var(--text-primary);
 }
 
 .chart-header span {
   font-size: 12px;
-  color: #2563EB;
+  color: var(--accent);
   cursor: pointer;
 }
 
@@ -198,8 +203,6 @@
 }
 
 /* Customer Growth */
-
-
 .customer-growth img {
   width: 100%;
   height: auto;
@@ -211,7 +214,7 @@
   display: flex;
   gap: 12px;
   font-size: 12px;
-  color: #555;
+  color: var(--text-secondary);
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
@@ -230,10 +233,10 @@
 
 /* Product Table */
 .product-table {
-
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--border-color);
 }
 
 .product-table table {
@@ -247,14 +250,15 @@
 .product-table th {
   padding: 10px;
   text-align: left;
-  color: #aaa;
+  color: var(--text-secondary);
   font-size: 12px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .product-table td {
   padding: 10px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .product-name {
@@ -262,14 +266,7 @@
   align-items: center;
   gap: 8px;
 }
-.dashboard {
-  padding: 24px;
-  max-width: 100%;
-  width: 100%;        /* ye line add karo */
-  flex: 1;             /* ye line add karo */
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+
 .product-img {
   width: 32px;
   height: 32px;
@@ -285,7 +282,7 @@
 }
 
 .success-badge {
-  background: rgba(76, 175, 80, 0.1);
+  background: rgba(76, 175, 80, 0.15);
   color: #4CAF50;
   padding: 3px 10px;
   border-radius: 20px;
@@ -326,8 +323,6 @@
     font-size: 20px;
   }
 }
-
-
 
 @media (max-width: 659px) {
   .stat-card h2 {

@@ -1,8 +1,8 @@
 .sidebar {
   width: 200px;
   height: 100vh;
-  background: white;
-  border-right: 1px solid #f0f0f0;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   padding: 20px 0;
@@ -10,7 +10,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  transition: width 0.3s ease, transform 0.3s ease;
+  transition: width 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
   z-index: 1000; 
 }
 
@@ -27,7 +27,8 @@
 
 .menu-icon {
   margin-top: 15px;
-  color: #2563EB;
+  color: var(--accent);
+  /* color: white; */
 }
 .sidebar.closed .menu-icon {
   margin-top: 15px;
@@ -38,7 +39,7 @@
 
 .toggle-btn {
   font-size: 20px;
-  color: #333;
+  color: var(--text-primary);
   background: none;
   border: none;
   cursor: pointer;
@@ -70,7 +71,7 @@
 /* Section Label */
 .menu-label {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-secondary);
   font-weight: 600;
   padding: 0 20px;
   margin: 16px 0 8px;
@@ -85,7 +86,7 @@
 .menu-icon {
   font-size: 20px;
   min-width: 20px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .menu a {
@@ -106,7 +107,7 @@
   align-items: center;
   padding: 10px 20px;
   font-size: 14px;
-  color: #555;
+  color: var(--text-secondary);
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.2s;
@@ -114,11 +115,11 @@
 
 .menu a:hover,
 .tools a:hover {
-  background: #f0f4ff;
+  background: var(--hover-bg);
 }
 .menu a.active {
-  background: #D9EDFF;
-  color: black;
+  background: var(--hover-bg);
+  color: var(--text-primary);
   border-radius: 8px;
 }
 
@@ -128,7 +129,7 @@
   align-items: center;
   padding: 10px 20px;
   font-size: 14px;
-  color: #555;
+  color: var(--text-secondary);
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.2s;
@@ -154,12 +155,12 @@
 .dropdown-items a {
   padding: 6px 20px;
   font-size: 13px;
-  color: #777;
+  color: var(--text-secondary);
   text-decoration: none;
 }
 
 .dropdown-items a:hover {
-  color: #D9EDFF;
+  color: var(--accent);
 }
 
 /* Tools */
@@ -170,27 +171,44 @@
 }
 
 /* Dark Mode */
-.dark-mode-toggle {
+.dark-mode-toggle{
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  margin: 2px 8px;
-  font-size: 14px;
-  color: #555;
-}
+  justify-content: space-around;
 
+}
 .toggle-switch {
-  width: 36px;
-  height: 20px;
+  width: 40px;
+  height: 22px;
   background: #ccc;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
+  flex-shrink: 0;
+  transition: background-color 0.25s ease;
+}
+.dark-mode-toggle span ::after{
+  color:white;
+}
+.toggle-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: left 0.25s ease;
 }
 
 .toggle-switch.on {
-  background: #2563EB;
+  background: var(--accent);
+}
+
+.toggle-switch.on::after {
+  left: 20px;
 }
 
 
@@ -199,7 +217,7 @@
   align-items: center;
   gap: 10px;
   padding: 16px 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--border-color);
   cursor: pointer;
 }
 
@@ -214,20 +232,20 @@
   margin: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .user small {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-secondary);
 }
 .user a {
-  background-color: #2563EB;
+  background-color: #2563eb;
   margin-left: auto;
   text-decoration: none;
   color: white;
   font-weight: 500;
-  padding: 5px;
+  padding: 8px;
   border-radius: 5px;
 }
 
@@ -241,26 +259,6 @@
   background: rgba(0, 0, 0, 0.4);
   z-index: 999;
 }
-.product-item {
-  position: relative;
-}
-
-/* Flyout dropdown jab sidebar closed ho */
-.dropdown-flyout {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  margin-left: 8px;
-  background: white;
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  padding: 10px 0;
-  min-width: 160px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-}
 
 .product-item {
   position: relative;
@@ -272,8 +270,8 @@
   top: 0;
   left: 100%;
   margin-left: 8px;
-  background: white;
-  border: 1px solid #f0f0f0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   padding: 10px 0;
@@ -287,21 +285,22 @@
   padding: 6px 16px;
   font-size: 12px;
   font-weight: 700;
-  color: #aaa;
+  color: var(--text-secondary);
 }
 
 .dropdown-flyout a {
   padding: 8px 16px;
   font-size: 13px;
-  color: #333;
+  color: var(--text-primary);
   text-decoration: none;
   white-space: nowrap;
 }
 
 .dropdown-flyout a:hover {
-  background: #f5f7ff;
-  color: #2563EB;
+  background: var(--hover-bg);
+  color: var(--accent);
 }
+
 @media (max-width: 1024px) {
 
 }

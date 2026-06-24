@@ -28,12 +28,16 @@ export default function AddProduct() {
     },
     validationSchema: addProductSchema,
     enableReinitialize: true,
-    onSubmit: (values) => {
-      navigate(`/product/${values.category.toLowerCase()}`, {
-        state: { success: editProduct ? "Product Updated Successfully!" : "Product Saved Successfully!" },
-      });
-    },
+onSubmit: (values) => {
+  navigate("/product", {
+    state: { success: editProduct ? "Product Updated Successfully!" : "Product Saved Successfully!" },
   });
+},
+
+
+  });
+
+
 
   const handleImageUpload = (index, e) => {
     const file = e.target.files[0];

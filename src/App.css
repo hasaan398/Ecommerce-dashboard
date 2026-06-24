@@ -15,14 +15,40 @@ html, body, #root {
   background-color: #F7F7F7;
 
 }
-
+button:hover{
+  background-color: #2564eb9d;
+  transition: 1s;
+}
 .main {
   flex: 1;
   min-width: 0;       /* important: flex item ko shrink/grow sahi se karne deta hai */
   padding-top: 60px;
   transition: margin-left 0.2s ease;
 }
+:root {
+  --bg-main: #F7F7F7;
+  --bg-card: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #aaaaaa;
+  --border-color: #f0f0f0;
+}
 
+body.dark {
+  --bg-main: #121212;
+  --bg-card: #1e1e1e;
+  --text-primary: #e8e8e8;
+  --text-secondary: #888888;
+  --border-color: #2a2a2a;
+}
+
+body {
+  background-color: var(--bg-main);
+  transition: background-color 0.3s ease;
+}
+
+.layout {
+  background-color: var(--bg-main);
+}
 .content {
   padding: 0;
   margin-right: 0;

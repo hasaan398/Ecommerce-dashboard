@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./help.css";
 import { MdEmail, MdPhone, MdChat, MdKeyboardArrowDown } from "react-icons/md";
 import { toast } from "react-toastify";
-
+import { Link } from "react-router-dom";
 const faqData = [
   {
     question: "How do I add a new product?",
@@ -54,7 +54,10 @@ export default function Help() {
       {/* Title */}
       <div className="page-title">
         <h1>Help</h1>
-        <p>Dashboard ▼ <span className="bold">Help</span></p>
+<p>
+  <Link to="/dashboard">Dashboard</Link> ⯈{" "}
+  <span className="bold">Help</span>
+</p>
       </div>
 
       <div className="help-grid">

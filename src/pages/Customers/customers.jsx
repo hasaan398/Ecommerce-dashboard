@@ -4,7 +4,7 @@ import "./customers.css";
 import searchIcon from "../../assets/search.png";
 import { customers } from "../../data";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 
 export default function Customers() {
   const navigate = useNavigate();
@@ -60,10 +60,13 @@ export default function Customers() {
     <div className="customers-page">
 
       {/* Title */}
-      <div className="page-title">
-        <h1>Customer</h1>
-        <p>Dashboard ▼ <span className="bold">Customer</span></p>
-      </div>
+<div className="page-title">
+  <h1>Customer</h1>
+  <p>
+    <Link to="/dashboard">Dashboard</Link> ▼{" "}
+    <span className="bold">Customer</span>
+  </p>
+</div>
 
       {/* Toolbar */}
       <div className="customers-toolbar">

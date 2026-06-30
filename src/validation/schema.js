@@ -17,15 +17,17 @@ const schema = Yup.object({
 });
 export const addProductSchema = Yup.object({
   sku: Yup.string()
-    .min(6, "SKU must be at least 6 characters")
+    .min(3, "SKU must be at least 3 characters")
     .required("SKU is required"),
   name: Yup.string()
     .min(3, "Product name must be at least 3 characters")
     .required("Product name is required"),
-  size: Yup.string()
-    .required("Size is required"),
-  color: Yup.string()
-    .required("Color is required"),
+  brand: Yup.string()
+    .required("Brand is required"),
+  weight: Yup.number()
+    .typeError("Weight must be a number")
+    .positive("Weight must be greater than 0")
+    .required("Weight is required"),
   category: Yup.string()
     .required("Please select a category"),
   price: Yup.number()
@@ -34,12 +36,11 @@ export const addProductSchema = Yup.object({
     .required("Price is required"),
   qty: Yup.number()
     .typeError("Quantity must be a number")
-    .min(1, "Quantity must be at least 1")
+    .min(0, "Quantity cannot be negative")
     .required("Quantity is required"),
   status: Yup.string()
     .required("Please select a status"),
 });
-
 export const addCustomerSchema = Yup.object({
   name: Yup.string()
     .min(3, "Name must be at least 3 characters")

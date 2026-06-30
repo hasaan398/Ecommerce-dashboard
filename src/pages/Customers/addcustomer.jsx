@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { addCustomerSchema } from "../../validation/schema";
@@ -33,7 +33,11 @@ export default function AddCustomer() {
       {/* Title */}
       <div className="page-title">
         <h1>Customer</h1>
-        <p>Dashboard ▼ Customer ▼ <span className="bold">Add Customer</span></p>
+     <p>
+  <Link to="/dashboard">Dashboard</Link> ▼{" "}
+  <Link to="/customers">Customer</Link> ▼{" "}
+  <span className="bold">Add Customer</span>
+</p>
       </div>
 
       <form

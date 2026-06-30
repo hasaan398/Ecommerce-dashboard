@@ -1,26 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import "./product.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import searchIcon from "../../assets/search.png";
-import { allRows, tabs } from "../../data";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
-export default function Product({ category }) {
+export default function Product() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState(category || "Sneakers");
+  const { category } = useParams();
+
+  const [allRows, setAllRows] = useState([]);
+  const [tabs, setTabs] = useState([]);
+  const [activeTab, setActiveTab] = useState(category || "");
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (location.state?.success) {
-      toast.success(location.state.success);
-      window.history.replaceState({}, document.title);
-    }
-  }, [location.state]);
+    fetch("https://dummyjson.com/products?limit=40")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch products");
+        return res.json();
+      })
+      .then((data) => {
+        const mapped = data.products.map((p) => ({
+          id: p.id,
+          productId: p.sku || `SKU-${p.id}`,
+          image: p.thumbnail,
+          name: p.title,
+          price: `$${p.price.toFixed(2)}`,
+          size: p.weight ? `${p.weight}kg` : "-",
+          qty: p.stock,
+          date: new Date(p.meta?.createdAt || Date.now()).toLocaleDateString(),
+          status: p.stock > 0 ? "Available" : "Out of Stock",
+          category: p.category,
+        }));
 
-  // ✅ Sidebar se category change hone par tab update karo
+        setAllRows(mapped);
+
+        const uniqueCategories = [...new Set(mapped.map((m) => m.category))];
+        setTabs(uniqueCategories.map((c) => ({ name: c })));
+
+        if (!category && uniqueCategories.length > 0) {
+          setActiveTab(uniqueCategories[0]);
+        }
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
   useEffect(() => {
     if (category) {
       setActiveTab(category);
@@ -29,7 +62,7 @@ export default function Product({ category }) {
 
   const filteredRows = allRows.filter(
     (r) =>
-      r.category?.toLowerCase().trim() === activeTab.toLowerCase() &&
+      r.category?.toLowerCase().trim() === activeTab?.toLowerCase() &&
       r.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -51,7 +84,7 @@ export default function Product({ category }) {
       ),
     },
     { field: "price", headerName: "Price", width: 100 },
-    { field: "size", headerName: "Size", width: 80 },
+    { field: "size", headerName: "Weight", width: 80 },
     { field: "qty", headerName: "QTY", width: 80 },
     { field: "date", headerName: "Date", width: 180 },
     {
@@ -71,7 +104,11 @@ export default function Product({ category }) {
       sortable: false,
       renderCell: (params) => (
         <div className="action-btns">
-          <span title="View">
+          <span
+            title="View"
+            onClick={() => navigate(`/product/view/${params.row.id}`)}
+            style={{ cursor: "pointer" }}
+          >
             <FaEye />
           </span>
           <span
@@ -81,7 +118,13 @@ export default function Product({ category }) {
           >
             <FaEdit />
           </span>
-          <span title="Delete">
+          <span
+            title="Delete"
+            onClick={() => {
+              toast.success("Product deleted (dummy API, no real delete)");
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <FaTrash />
           </span>
         </div>
@@ -89,13 +132,33 @@ export default function Product({ category }) {
     },
   ];
 
+  if (loading) {
+    return (
+      <div className="product-page">
+        <p style={{ padding: 24 }}>Loading products from API...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="product-page">
+        <p style={{ padding: 24, color: "red" }}>Error: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="product-page">
 
       {/* Title */}
       <div className="page-title">
         <h1>Product</h1>
-        <p>Dashboard ▼ Product ▼ {activeTab}</p>
+        <p>
+          <Link to="/dashboard">Dashboard</Link> ⯈{" "}
+          <Link to="/product">Product</Link> ⯈{" "}
+          <span className="bold">{activeTab}</span>
+        </p>
       </div>
 
       {/* Toolbar */}
@@ -126,7 +189,10 @@ export default function Product({ category }) {
             <button
               key={tab.name}
               className={`tab-btn ${activeTab === tab.name ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.name)}
+              onClick={() => {
+                setActiveTab(tab.name);
+                navigate(`/product/${tab.name}`);
+              }}
             >
               {tab.name} ({count})
             </button>

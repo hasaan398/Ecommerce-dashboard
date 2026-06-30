@@ -4,7 +4,7 @@ import "./transaction.css";
 import searchIcon from "../../assets/search.png";
 import { orders } from "../../data";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation,Link} from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Transaction() {
@@ -96,7 +96,11 @@ export default function Transaction() {
       {/* Title */}
       <div className="page-title">
         <h1>Orders</h1>
-        <p>Dashboard ▼ Orders ▼ {activeTab}</p>
+        <p>
+  <Link to="/dashboard">Dashboard</Link> ▼{" "}
+  <Link to="/transaction">Orders</Link> ▼{" "}
+  <span className="bold">{activeTab}</span>
+</p>
       </div>
 
       {/* Toolbar */}

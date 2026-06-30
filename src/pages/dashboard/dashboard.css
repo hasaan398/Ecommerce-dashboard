@@ -79,17 +79,16 @@
 
 .progress-bar {
   height: 8px;
-  background: var(--hover-bg);
+  background: var(--hover-bg, #f0f4ff);
   border-radius: 10px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--accent);
+  background: var(--accent, #2563EB);
   border-radius: 10px;
 }
-
 /* Stat Cards */
 .stat-card {
   background: var(--bg-card);
@@ -117,18 +116,16 @@
   color: white;
 }
 
-.stat-card.blue .stat-top {
-  color: rgba(255, 255, 255, 0.7);
-}
+
 
 .stat-card h2 {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 8px;
 }
-
-.stat-card small.green { color: #4CAF50; }
-.stat-card small.red { color: #e53935; }
+.stat-card small.green{ color: #0f7420; font-weight: 700;}
+.stat-card small.green { color: #0f7420;font-weight: 700; }
+.stat-card small.red { color: #e53935;font-weight: 700; }
 .stat-card.blue small { color: rgba(255, 255, 255, 0.8); }
 
 /* Sales Chart */
@@ -200,16 +197,17 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  margin-top: 10px;
 }
 
 /* Customer Growth */
-.customer-growth img {
-  width: 100%;
+.customer-growth map{
+  width: 350px;
   height: auto;
-  border-radius: 8px;
-  display: block;
 }
-
+.product-table{
+  width: 800px;
+}
 .legend {
   display: flex;
   gap: 12px;

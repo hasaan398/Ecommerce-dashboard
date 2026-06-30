@@ -90,24 +90,43 @@ function Sidebar({ isOpen, setIsOpen }) {
               {isOpen && <span>{productOpen ? "▲" : "▼"}</span>}
             </div>
 
-            {productOpen && isOpen && (
-              <div className="dropdown-items">
-                <Link to="/product/sneakers" onClick={handleLinkClick}>Sneakers</Link>
-                <Link to="/product/jacket" onClick={handleLinkClick}>Jacket</Link>
-                <Link to="/product/t-shirt" onClick={handleLinkClick}>T-Shirt</Link>
-                <Link to="/product/bag" onClick={handleLinkClick}>Bag</Link>
-              </div>
-            )}
+{productOpen && isOpen && (
+  <div className="dropdown-items">
+    <Link to="/product/beauty" onClick={handleLinkClick}>Beauty</Link>
+    <Link to="/product/fragrances" onClick={handleLinkClick}>Fragrances</Link>
+    <Link to="/product/furniture" onClick={handleLinkClick}>Furniture</Link>
+    <Link to="/product/groceries" onClick={handleLinkClick}>Groceries</Link>
+  </div>
+)}
 
-            {productOpen && !isOpen && !isMobile && (
-              <div className="dropdown-flyout">
-                <span className="flyout-title">Product (119)</span>
-                <Link to="/product/sneakers" onClick={() => setProductOpen(false)}>Sneakers</Link>
-                <Link to="/product/jacket" onClick={() => setProductOpen(false)}>Jacket</Link>
-                <Link to="/product/t-shirt" onClick={() => setProductOpen(false)}>T-Shirt</Link>
-                <Link to="/product/bag" onClick={() => setProductOpen(false)}>Bag</Link>
-              </div>
-            )}
+    {productOpen && !isOpen && !isMobile && (
+  <div className="dropdown-flyout">
+    <span className="flyout-title">Products</span>
+
+    <Link to="/product/beauty" onClick={() => setProductOpen(false)}>
+      Beauty
+    </Link>
+
+    <Link to="/product/fragrances" onClick={() => setProductOpen(false)}>
+      Fragrances
+    </Link>
+
+    <Link to="/product/furniture" onClick={() => setProductOpen(false)}>
+      Furniture
+    </Link>
+
+    <Link to="/product/groceries" onClick={() => setProductOpen(false)}>
+      Groceries
+    </Link>
+        <Link to="/product/furniture" onClick={() => setProductOpen(false)}>
+      Furniture
+    </Link>
+
+    <Link to="/product/groceries" onClick={() => setProductOpen(false)}>
+      Groceries
+    </Link>
+  </div>
+)}
           </div>
 
           <Link to="/transaction" onClick={handleLinkClick} className={location.pathname === "/transaction" ? "active" : ""}>

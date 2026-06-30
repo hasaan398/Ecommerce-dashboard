@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation,Link} from "react-router-dom";
 import { useFormik } from "formik";
 import { addOrderSchema } from "../../validation/schema";
 import { toast } from "react-toastify";
@@ -25,14 +25,18 @@ export default function AddOrder() {
     },
   });
 
-  return (
-    <div className="addorder-page">
+return (
+  <div className="addorder-page">
 
-      {/* Title */}
-      <div className="page-title">
-        <h1>Orders</h1>
-        <p>Dashboard ▼ Orders ▼ <span className="bold">Add Order</span></p>
-      </div>
+    {/* Title */}
+    <div className="page-title">
+      <h1>Orders</h1>
+      <p>
+        <Link to="/dashboard">Dashboard</Link> ▼{" "}
+        <Link to="/transaction">Orders</Link> ▼{" "}
+        <span className="bold">Add Order</span>
+      </p>
+    </div>
 
       <form
         onSubmit={(e) => {

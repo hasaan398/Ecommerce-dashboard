@@ -31,6 +31,8 @@ button:hover{
   --text-primary: #333333;
   --text-secondary: #aaaaaa;
   --border-color: #f0f0f0;
+  --accent: #2563EB;
+  --hover-bg: #f0f4ff;
 }
 
 body.dark {

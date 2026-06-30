@@ -1,43 +1,72 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { addProductSchema } from "../../validation/schema";
-import "./addproduct.css";
 import { FaImage } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { allRows } from "../../data";
+import "./addproduct.css";
 
 export default function AddProduct() {
   const navigate = useNavigate();
-  const { id } = useParams();  // ← URL se id milega
+  const { id } = useParams();
   const [images, setImages] = useState([null, null, null, null]);
+  const [editProduct, setEditProduct] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(!!id);
 
-  // Agar id hai, toh edit mode — us product ka data dhundo
-  const editProduct = id ? allRows.find((p) => String(p.id) === id) : null;
+  // Categories list fetch karo (dropdown ke liye)
+  useEffect(() => {
+    fetch("https://dummyjson.com/products/categories")
+      .then((res) => res.json())
+      .then((data) => {
+
+        const list = Array.isArray(data)
+          ? data.map((c) => (typeof c === "string" ? c : c.name || c.slug))
+          : [];
+        setCategories(list);
+      })
+      .catch(() => setCategories([]));
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      setLoading(true);
+      fetch(`https://dummyjson.com/products/${id}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Product not found");
+          return res.json();
+        })
+        .then((data) => {
+          setEditProduct(data);
+          setImages([data.thumbnail, null, null, null]);
+          setLoading(false);
+        })
+        .catch(() => {
+          toast.error("Failed to load product for editing");
+          setLoading(false);
+        });
+    }
+  }, [id]);
 
   const formik = useFormik({
     initialValues: {
-      sku: editProduct?.productId || "",
-      name: editProduct?.name || "",
-      size: editProduct?.size || "",
-      color: editProduct?.color || "",
+      sku: editProduct?.sku || "",
+      name: editProduct?.title || "",
+      brand: editProduct?.brand || "",
+      weight: editProduct?.weight || "",
       category: editProduct?.category || "",
-      price: editProduct?.price?.replace("$", "") || "",
-      qty: editProduct?.qty || "",
-      status: editProduct?.status || "",
+      price: editProduct?.price || "",
+      qty: editProduct?.stock || "",
+      status: editProduct ? (editProduct.stock > 0 ? "Available" : "Out of Stock") : "",
     },
     validationSchema: addProductSchema,
     enableReinitialize: true,
-onSubmit: (values) => {
-  navigate("/product", {
-    state: { success: editProduct ? "Product Updated Successfully!" : "Product Saved Successfully!" },
+    onSubmit: (values) => {
+      navigate("/product", {
+        state: { success: editProduct ? "Product Updated Successfully!" : "Product Saved Successfully!" },
+      });
+    },
   });
-},
-
-
-  });
-
-
 
   const handleImageUpload = (index, e) => {
     const file = e.target.files[0];
@@ -48,12 +77,13 @@ onSubmit: (values) => {
     }
   };
 
-  // Edit mode mein existing image dikhao
-  useEffect(() => {
-    if (editProduct?.image) {
-      setImages([editProduct.image, null, null, null]);
-    }
-  }, [editProduct]);
+  if (loading) {
+    return (
+      <div className="addproduct-page">
+        <p style={{ padding: 24 }}>Loading product...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="addproduct-page">
@@ -61,20 +91,29 @@ onSubmit: (values) => {
       {/* Title */}
       <div className="page-title">
         <h1>Product</h1>
-        <p>Dashboard ▼ Product ▼ Sneakers ▼ <span className="bold">{editProduct ? "Edit Product" : "Add Product"}</span></p>
+        <p>
+          <Link to="/dashboard">Dashboard</Link> ⯈{" "}
+          <Link to="/product">Product</Link> ⯈{" "}
+          {formik.values.category ? (
+            <Link to={`/product/${formik.values.category.toLowerCase()}`}>
+              {formik.values.category}
+            </Link>
+          ) : (
+            "Category"
+          )}{" "}
+          ⯈ <span className="bold">{editProduct ? "Edit Product" : "Add Product"}</span>
+        </p>
       </div>
 
       <form onSubmit={formik.handleSubmit}>
         <div className="addproduct-grid">
 
-          {/* LEFT - Product Information */}
           <div className="addproduct-card">
             <h6>Product Information</h6>
             <p className="card-subtitle">
               Lorem ipsum dolor sit amet consectetur. Non ac nulla aliquam aenean in velit mattis.
             </p>
 
-            {/* SKU */}
             <div className="form-group">
               <label>SKU</label>
               <input
@@ -91,7 +130,6 @@ onSubmit: (values) => {
               )}
             </div>
 
-            {/* Product Name */}
             <div className="form-group">
               <label>Product Name</label>
               <input
@@ -108,41 +146,39 @@ onSubmit: (values) => {
               )}
             </div>
 
-            {/* Size + Color */}
             <div className="form-row">
               <div className="form-group">
-                <label>Size</label>
+                <label>Brand</label>
                 <input
                   type="text"
-                  name="size"
-                  placeholder="Input Price"
-                  value={formik.values.size}
+                  name="brand"
+                  placeholder="Input brand"
+                  value={formik.values.brand}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={formik.touched.size && formik.errors.size ? "input-error" : ""}
+                  className={formik.touched.brand && formik.errors.brand ? "input-error" : ""}
                 />
-                {formik.touched.size && formik.errors.size && (
-                  <small className="error-msg">{formik.errors.size}</small>
+                {formik.touched.brand && formik.errors.brand && (
+                  <small className="error-msg">{formik.errors.brand}</small>
                 )}
               </div>
               <div className="form-group">
-                <label>Color</label>
+                <label>Weight (kg)</label>
                 <input
                   type="text"
-                  name="color"
-                  placeholder="Color"
-                  value={formik.values.color}
+                  name="weight"
+                  placeholder="Input weight"
+                  value={formik.values.weight}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={formik.touched.color && formik.errors.color ? "input-error" : ""}
+                  className={formik.touched.weight && formik.errors.weight ? "input-error" : ""}
                 />
-                {formik.touched.color && formik.errors.color && (
-                  <small className="error-msg">{formik.errors.color}</small>
+                {formik.touched.weight && formik.errors.weight && (
+                  <small className="error-msg">{formik.errors.weight}</small>
                 )}
               </div>
             </div>
 
-            {/* Category + Price */}
             <div className="form-row">
               <div className="form-group">
                 <label>Product Category</label>
@@ -154,10 +190,9 @@ onSubmit: (values) => {
                   className={formik.touched.category && formik.errors.category ? "input-error" : ""}
                 >
                   <option value="">Select product category</option>
-                  <option value="Sneakers">Sneakers</option>
-                  <option value="Jacket">Jacket</option>
-                  <option value="T-Shirt">T-Shirt</option>
-                  <option value="Bag">Bag</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
                 </select>
                 {formik.touched.category && formik.errors.category && (
                   <small className="error-msg">{formik.errors.category}</small>
@@ -180,9 +215,8 @@ onSubmit: (values) => {
               </div>
             </div>
 
-            {/* Quantity */}
             <div className="form-group">
-              <label>Quantity</label>
+              <label>Quantity (Stock)</label>
               <input
                 type="text"
                 name="qty"
@@ -197,7 +231,6 @@ onSubmit: (values) => {
               )}
             </div>
 
-            {/* Status */}
             <div className="form-group">
               <label>Status Product</label>
               <select
@@ -217,7 +250,6 @@ onSubmit: (values) => {
             </div>
           </div>
 
-          {/* RIGHT - Image Product */}
           <div className="addproduct-card">
             <h6>Image Product</h6>
             <p className="card-note">

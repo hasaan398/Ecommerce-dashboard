@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./salesreport.css";
+import { useLocation, useNavigate ,Link} from "react-router-dom";
 import {
   LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
@@ -51,7 +52,11 @@ export default function SalesReport() {
       {/* Title */}
       <div className="page-title">
         <h1>Sales Report</h1>
-        <p>Dashboard ▼ <span className="bold">Sales Report</span></p>
+       <p>
+  <Link to="/dashboard">Dashboard</Link> ⯈{" "}
+  <Link to="/customers">Customer</Link> ⯈{" "}
+  <span className="bold">Add Customer</span>
+</p>
       </div>
 
       {/* Filter Row */}

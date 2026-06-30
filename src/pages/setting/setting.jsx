@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { MdVisibility, MdVisibilityOff ,MdEdit} from "react-icons/md";
+import { MdVisibility, MdVisibilityOff, MdEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
 import "./setting.css";
 
 const settingsSchema = Yup.object({
@@ -48,7 +49,10 @@ export default function Settings() {
       {/* Title */}
       <div className="page-title">
         <h1>Account & Settings</h1>
-        <p>Dashboard ▼ <span className="bold">Profile</span></p>
+       <p>
+  <Link to="/dashboard">Dashboard</Link> ⯈{" "}
+  <span className="bold">{activeTab}</span>
+</p>
       </div>
 
       {/* Tabs */}

@@ -1,10 +1,96 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./dashboard.css";
-import chartsImg from "../../assets/charts.png";
+import Chart from "react-apexcharts";
 import mapImg from "../../assets/map.png";
 import shoesImg from "../../assets/shoes.png";
 
 export default function Dashboard() {
+
+  // useEffect(() => {
+  //   fetch("https://api.openweathermap.org/data/2.5/weather?q=Lahore&appid=cb13910d3f202264ecc8b3680e9000eb&units=metric")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("Weather API test:", data);
+  //     })
+  //     .catch((err) => console.error("Error:", err));
+  // }, []);
+
+const chartOptions = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    zoom: {
+      enabled: false,
+    },
+  },
+  colors: ["#B4E61D", "#2563EB"],
+  stroke: {
+    curve: "smooth",
+    width: [4, 4],
+    dashArray: [0, 8],
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  grid: {
+    show: false,
+  },
+  legend: {
+    position: "top",
+    horizontalAlign: "left",
+    markers: {
+      radius: 2,
+    },
+  },
+  markers: {
+    size: 0,
+    hover: {
+      size: 7,
+    },
+  },
+  xaxis: {
+    categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
+  yaxis: {
+    show: false,
+  },
+  tooltip: {
+    shared: true,
+    intersect: false,
+  },
+};
+
+const chartSeries = [
+  {
+    name: "Average Sale Value",
+    data: [22, 15, 18, 28, 35, 34, 25, 20, 32, 38, 37, 46],
+  },
+  {
+    name: "Average item persale",
+    data: [14, 17, 29, 24, 26, 25, 32, 26, 34, 33, 45, 42],
+  },
+];
+
   return (
     <div className="dashboard">
 
@@ -37,8 +123,12 @@ export default function Dashboard() {
           </div>
 
           <div className="sales-chart">
-  
-            <img src={chartsImg} alt="charts" />
+            <Chart
+              options={chartOptions}
+              series={chartSeries}
+              type="line"
+              height={250}
+            />
           </div>
         </div>
 
@@ -46,7 +136,7 @@ export default function Dashboard() {
         <div className="right-col">
           <div className="stats-grid">
 
-            <div className="stat-card blue">
+            <div className="stat-card">
               <div className="stat-top">
                 <span>Total Revenue</span>
                 <span>↗</span>
@@ -96,11 +186,18 @@ export default function Dashboard() {
       {/* BOTTOM SECTION */}
       <div className="dashboard-bottom">
 
-        <div className="customer-growth">
-       
-   
-          <img src={mapImg} alt="map" />
-        </div>
+   <div className="customer-growth">
+  <div className="chart-header">
+    <h6>Customer Growth - 3 Province</h6>
+    <span>Show All</span>
+  </div>
+  <div className="legend">
+    <span><span className="dot green"></span>East Java (50%)</span>
+    <span><span className="dot blue"></span>Kalimantan (50%)</span>
+    <span><span className="dot red"></span>Bali (65%)</span>
+  </div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d244201.8395338205!2d74.14982657017556!3d31.56914551114501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srandom%20map!5e0!3m2!1sen!2s!4v1782673270170!5m2!1sen!2s" width="350" height="350"   referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
 
         <div className="product-table">
           <div className="chart-header">

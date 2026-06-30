@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./navbar.css";
 import search from "../../assets/search.png";
+import mailIcon from "../../assets/mail.png";
+import bellIcon from "../../assets/bell.png";
 
 export default function Header({ isOpen, setIsOpen }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
@@ -52,10 +54,10 @@ export default function Header({ isOpen, setIsOpen }) {
       {/* Right */}
       <div className="header-right">
         <div className="icon mail-icon">
-          <img src="/src/assets/mail.png" alt="mail" style={{ width: "32px" }} />
+          <img src={mailIcon} alt="mail" style={{ width: "32px" }} />
         </div>
         <div className="icon bell-icon">
-          <img src="/src/assets/bell.png" alt="bell" style={{ width: "32px" }} />
+          <img src={bellIcon} alt="bell" style={{ width: "32px" }} />
         </div>
         <div className="profile">
           <img src="https://i.pravatar.cc/32" alt="user" />

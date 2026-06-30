@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";import "./app.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

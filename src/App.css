@@ -21,7 +21,7 @@ button:hover{
 }
 .main {
   flex: 1;
-  min-width: 0;       /* important: flex item ko shrink/grow sahi se karne deta hai */
+  min-width: 0;      
   padding-top: 60px;
   transition: margin-left 0.2s ease;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft, FaStar, FaRegStar } from "react-icons/fa";
-import "./viewproduct.css";
+import "./ViewProduct.css";
 
 export default function ViewProduct() {
   const { id } = useParams();

@@ -405,3 +405,26 @@ img {
     grid-template-columns: 1fr;
   }
 }
+.product-tabs {
+  display: flex;
+  flex-wrap: nowrap;        /* important - wrap hone se rokta hai */
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 8px;
+}
+
+.product-tabs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.product-tabs::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.tab-btn {
+  flex-shrink: 0;     /* important - buttons ko squeeze hone se rokta hai */
+  white-space: nowrap;
+}

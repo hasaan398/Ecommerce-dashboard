@@ -196,7 +196,14 @@ const chartSeries = [
     <span><span className="dot blue"></span>Kalimantan (50%)</span>
     <span><span className="dot red"></span>Bali (65%)</span>
   </div>
-<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d244201.8395338205!2d74.14982657017556!3d31.56914551114501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srandom%20map!5e0!3m2!1sen!2s!4v1782673270170!5m2!1sen!2s" width="350" height="350"   referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d244201.8395338205!2d74.14982657017556!3d31.56914551114501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srandom%20map!5e0!3m2!1sen!2s!4v1782673270170!5m2!1sen!2s"
+  width="100%"
+  height="300"
+  style={{ border: 0, borderRadius: "8px" }}
+  referrerPolicy="strict-origin-when-cross-origin"
+  loading="lazy"
+></iframe>
 </div>
 
         <div className="product-table">

@@ -201,12 +201,15 @@
 }
 
 /* Customer Growth */
-.customer-growth map{
-  width: 350px;
-  height: auto;
+.customer-growth {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
 }
 .product-table{
-  width: 800px;
+  width: 100%;
 }
 .legend {
   display: flex;

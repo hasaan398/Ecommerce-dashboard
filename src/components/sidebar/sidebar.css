@@ -11,7 +11,7 @@
   left: 0;
   top: 0;
   transition: width 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .sidebar.closed {
@@ -28,23 +28,12 @@
 .menu-icon {
   margin-top: 15px;
   color: var(--accent);
-  /* color: white; */
 }
 .sidebar.closed .menu-icon {
   margin-top: 15px;
 }
 .sidebar.open .menu-icon {
   margin-top: 0;
-}
-
-.toggle-btn {
-  font-size: 20px;
-  color: var(--text-primary);
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 30px;
-  margin-left: 5px;
 }
 
 .sidebar.open {
@@ -56,16 +45,90 @@
 
 /* Logo */
 .logo {
-  align-items: center;
-  margin-bottom: 30px;
-  margin-left: 10px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 24px;
 }
+
 .logo img {
-  width: 50%;
+  height: 28px;
+  width: auto;
 }
-.kany img {
-  width: 80%;
+
+.toggle-btn {
+
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  background-color: none;
+
+}
+
+.toggle-btn:hover {
+  background: none;
+}
+
+.toggle-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.sidebar.closed .logo {
+  justify-content: center;
+  padding: 0;
+}
+
+/* Company Box */
+.company-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-card);
+  margin-top: 0;
+}
+
+.company-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid var(--border-color);
+}
+
+.company-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.company-text small {
+  font-size: 10px;
+  color: var(--text-secondary);
+  display: block;
+  line-height: 1.2;
+}
+
+.company-text p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 2px 0 0;
 }
 
 /* Section Label */
@@ -136,33 +199,34 @@
   cursor: pointer;
   gap: 5px;
 }
-.dropdown-toggle::after {
-  display: none;
-  margin-left: .255em;
-  vertical-align: .255em;
-  border-top: .3em solid;
-  border-right: .3em solid transparent;
-  border-bottom: 0;
-  border-left: .3em solid transparent;
-}
-
 .dropdown-items {
   display: flex;
   flex-direction: column;
   padding-left: 40px;
+  max-height: 100px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.dropdown-items::-webkit-scrollbar {
+  width: 5px;
 }
 
+.dropdown-items::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
 .dropdown-items a {
   padding: 6px 20px;
   font-size: 13px;
   color: var(--text-secondary);
   text-decoration: none;
 }
-
 .dropdown-items a:hover {
   color: var(--accent);
 }
-
+.dropdown-toggle::after {
+    display: none;
+}
 /* Tools */
 .tools {
   display: flex;
@@ -171,85 +235,73 @@
 }
 
 /* Dark Mode */
-.dark-mode-toggle{
+.dark-mode-toggle {
   display: flex;
-  justify-content: space-around;
-
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: var(--text-secondary);
+}
+.dark-mode-toggle a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+  cursor: default;
+  padding: 0;
+}
+.dark-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
 }
 .toggle-switch {
   width: 40px;
   height: 22px;
-  background: #ccc;
-  border-radius: 20px;
-  cursor: pointer;
+  background: #d1d5db;
+  border-radius: 30px;
   position: relative;
-  flex-shrink: 0;
-  transition: background-color 0.25s ease;
-}
-.dark-mode-toggle span ::after{
-  color:white;
+  cursor: pointer;
+  transition: .3s;
 }
 .toggle-switch::after {
   content: "";
   position: absolute;
-  top: 2px;
-  left: 2px;
   width: 18px;
   height: 18px;
-  background: white;
-  color: white;
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: left 0.25s ease;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: .3s;
 }
-
 .toggle-switch.on {
   background: var(--accent);
 }
-
 .toggle-switch.on::after {
   left: 20px;
 }
 
-
-.user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 20px;
+/* Logout Section */
+.logout {
   border-top: 1px solid var(--border-color);
-  cursor: pointer;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: center;
 }
-
-.user-img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user p {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.user small {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-.user a {
+.logout a {
   background-color: #2563eb;
-  margin-left: auto;
   text-decoration: none;
   color: white;
   font-weight: 500;
-  padding: 8px;
+  padding: 8px 20px;
   border-radius: 5px;
+  text-align: center;
+  width: 100%;
 }
 
-
+/* Overlay */
 .sidebar-overlay {
   position: fixed;
   top: 0;
@@ -260,11 +312,10 @@
   z-index: 999;
 }
 
+/* Flyout dropdown jab sidebar closed ho */
 .product-item {
   position: relative;
 }
-
-/* Flyout dropdown jab sidebar closed ho */
 .dropdown-flyout {
   position: absolute;
   top: 0;
@@ -280,14 +331,12 @@
   display: flex;
   flex-direction: column;
 }
-
 .dropdown-flyout .flyout-title {
   padding: 6px 16px;
   font-size: 12px;
   font-weight: 700;
   color: var(--text-secondary);
 }
-
 .dropdown-flyout a {
   padding: 8px 16px;
   font-size: 13px;
@@ -295,16 +344,12 @@
   text-decoration: none;
   white-space: nowrap;
 }
-
 .dropdown-flyout a:hover {
   background: var(--hover-bg);
   color: var(--accent);
 }
 
-@media (max-width: 1024px) {
-
-}
-
+/* Responsive */
 @media (max-width: 700px) {
   .sidebar {
     width: 220px;
@@ -312,33 +357,25 @@
     transition: transform 0.3s ease;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
   }
-
   .sidebar.open {
     width: 220px;
     transform: translateX(0);
   }
-
   .sidebar.closed {
     width: 220px;
     transform: translateX(-100%);
   }
-
-  /* Sidebar ke apne toggle button ko mobile par hide kar do,
-     ab hamburger Header se control hoga */
   .toggle-btn {
     display: none;
   }
-
-  .user a {
+  .logout a {
     font-size: 12px;
   }
 }
-
 @media (max-width: 480px) {
   .sidebar.open {
     width: 200px;
   }
-
   .logo img {
     width: 40%;
   }
